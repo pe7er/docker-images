@@ -63,13 +63,19 @@ case "$1" in
           TEMPLATE="update-info-${MAJOR}.json"
       fi
 
+      # Workaround for Joomla Update doesn't support Release_Candidate stability as text
+      UPDATE_STABILITY_FOR_UPDATER=$UPDATE_STABILITY
+      if [ "$UPDATE_STABILITY" == "Release_Candidate" ]; then
+          UPDATE_STABILITY_FOR_UPDATER="RC"
+      fi
+
       sed -e "s/\$STABILITY/${UPDATE_STABILITY}/g" -e "s/\$VERSION/${UPDATE_VERSION}/g" -e "s/\$DASHVERSION/${UPDATE_VERSION//./-}/g" $basedir/templates/${TEMPLATE} | tee /tmp/update-info.json
       cat <<< $(jq '.["description"] = "'"${UPDATE_DESCRIPTION}"'"' /tmp/update-info.json) > /tmp/update-info.json
       cat <<< $(jq '.["infourl"]["url"] = "'"${UPDATE_INFO_URL}"'"' /tmp/update-info.json) > /tmp/update-info.json
       cat <<< $(jq '.["infourl"]["title"] = "'"${UPDATE_INFO_TITLE}"'"' /tmp/update-info.json) > /tmp/update-info.json
       cat <<< $(jq '.["name"] = "'"${UPDATE_NAME}"'"' /tmp/update-info.json) > /tmp/update-info.json
       cat <<< $(jq '.["version"] = "'"${UPDATE_VERSION}"'"' /tmp/update-info.json) > /tmp/update-info.json
-      cat <<< $(jq '.["stability"] = "'"${UPDATE_STABILITY}"'"' /tmp/update-info.json) > /tmp/update-info.json
+      cat <<< $(jq '.["stability"] = "'"${UPDATE_STABILITY_FOR_UPDATER}"'"' /tmp/update-info.json) > /tmp/update-info.json
       $TUF add --custom="$(jq -c '.' /tmp/update-info.json)"
       L_git_add_and_commit "Prepare ${UPDATE_VERSION}"
       ;;
