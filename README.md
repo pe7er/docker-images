@@ -6,11 +6,11 @@ More Documentation can be found here:
 
 ## Table Of Content
 
-- [Jooma! Tuf Docker](#joomla-tuf-docker)- [Joomla! TUF Docker](#joomla-tuf-docker)
-  - [Table Of Content](#table-of-content)
+- [Joomla! Tuf Docker](#joomla-tuf-docker)- [Joomla! TUF Docker](#joomla-tuf-docker)
+  - [Table Of Contents](#table-of-contents)
   - [VARS](#vars)
   - [Setup](#setup)
-  - [Avaible TUF parameters for the Docker TUF Client](#avaible-tuf-parameters-for-the-docker-tuf-client)
+  - [Available TUF parameters for the Docker TUF Client](#available-tuf-parameters-for-the-docker-tuf-client)
     - [`prepare-release`](#prepare-release)
     - [`sign-release`](#sign-release)
     - [`release`](#release)
@@ -30,7 +30,7 @@ You can create the [`.env`](./.env) file from the [`env.sample`](./env.example) 
 | ⚠️ | ACCESS_TOKEN       |          | Github Access token with access to the `GIT_RUL`   |
 |    | GIT_URL            | <https://github.com/joomla/updates.git> | The Github Repo URL |
 |    | GITHUB_CLI_VERSION | `2.6.0`  | The Github CLI Version to install                  |
-| ⚠️ | GIT_USER_NAME      | ``       | git usernname for the gitconfig runtime |
+| ⚠️ | GIT_USER_NAME      | ``       | git username for the gitconfig runtime |
 | ⚠️ | GIT_USER_EMAIL     | ``       | git user.email for the gitconfig runtime |
 
 ## Setup
@@ -41,7 +41,7 @@ Build the Image
 docker build -t joomla-tuf:updater -f Dockerfile .
 ```
 
-You can also use the [`build.sh](./build.sh).
+You can also use the [build.sh](./build.sh).
 
 ```bash
 bash build.sh
@@ -55,9 +55,9 @@ docker run --rm -e ACCESS_TOKEN=REDACTED_TOKEN -e GIT_BRANCH_NAME=main joomla-tu
 usage: tuf [-h|--help] [-d|--dir=<dir>] [--insecure-plaintext] <command> [<args>...]
 ```
 
-## Avaible TUF parameters for the Docker TUF Client
+## Available TUF parameters for the Docker TUF Client
 
-This documents which paramters are avaible for the `sign.sh` script, when asked for `Parameter to be passed to TUF:`.
+This documents which parameters are available for the `sign.sh` script, when asked for `Parameter to be passed to TUF:`.
 
 Run [`sign.sh`](./sign.sh) for the wrapper client:
 
@@ -91,7 +91,7 @@ Maintenance Actions:
 Action to be passed to TUF: 
 ```
 
-Each option is explained bellow.
+Each option is explained below.
 
 ### 1 prepare-release
 
